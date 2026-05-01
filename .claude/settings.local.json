@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Initial SwiftAi landing page - production-ready Next.js website *)",
+      "Bash(chmod +x /Users/rupesh/experiments/swiftai-website/verify-build.sh)",
+      "Bash(/Users/rupesh/experiments/swiftai-website/verify-build.sh)",
+      "Bash(git commit -m 'Add deployment and quickstart guides *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
