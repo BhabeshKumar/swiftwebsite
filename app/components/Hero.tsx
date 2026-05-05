@@ -105,6 +105,7 @@ export default function Hero() {
             // Near mouse → brighter cyan; default → dim cyan
             const nearMouse =
               mouse.x !== null &&
+              mouse.y !== null &&
               Math.sqrt((particles[a].x - mouse.x) ** 2 + (particles[a].y - mouse.y) ** 2) <
                 mouse.radius
 
