@@ -1,7 +1,6 @@
 import Hero from './components/Hero'
 import TrustStrip from './components/TrustStrip'
 import Services from './components/Services'
-import WhatWeBuilt from './components/WhatWeBuilt'
 import WhySwiftAi from './components/WhySwiftAi'
 import Process from './components/Process'
 import UseCases from './components/UseCases'
@@ -16,9 +15,6 @@ export default function Home() {
       <TrustStrip />
       <section id="services">
         <Services />
-      </section>
-      <section id="built">
-        <WhatWeBuilt />
       </section>
       <WhySwiftAi />
       <section id="process">
