@@ -16,77 +16,57 @@ html {
 body {
   background: #0f172a;
   color: #e2e8f0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #0e7490; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
 
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
+/* ── Selection ── */
+::selection { background: #06b6d4; color: #0f172a; }
 
-::-webkit-scrollbar-thumb {
-  background: #06b6d4;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #22d3ee;
-}
-
-/* Selection styling */
-::selection {
-  background: #06b6d4;
-  color: #0f172a;
-}
-
-/* Gradient text utility */
+/* ── Gradient text ── */
 .gradient-text {
-  background: linear-gradient(135deg, #06b6d4, #22d3ee);
+  background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glass effect */
+/* ── Glass card ── */
 .glass-effect {
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(6, 182, 212, 0.1);
 }
 
-/* Glow effect */
+/* ── Glow card hover ── */
 .glow-card {
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.25s ease;
 }
-
 .glow-card:hover {
-  box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
-  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 0 28px rgba(6, 182, 212, 0.22);
+  border-color: rgba(6, 182, 212, 0.45);
 }
 
-/* Section spacing */
-.section-padding {
-  padding: 4rem 1.5rem;
+/* ── Section spacing ── */
+.section-padding { padding: 4rem 1.5rem; }
+@media (min-width: 768px)  { .section-padding { padding: 6rem 2rem; } }
+@media (min-width: 1024px) { .section-padding { padding: 8rem 4rem; } }
+
+/* ── Radial gradient background helper ── */
+.bg-gradient-radial {
+  background-image: radial-gradient(var(--tw-gradient-stops));
 }
 
-@media (min-width: 768px) {
-  .section-padding {
-    padding: 6rem 2rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-padding {
-    padding: 8rem 4rem;
-  }
-}
-
-/* Smooth transitions */
+/* ── Link / button transitions ── */
 a, button, [role="button"] {
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }

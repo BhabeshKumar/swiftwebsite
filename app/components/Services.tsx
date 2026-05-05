@@ -1,116 +1,102 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  MessageSquare,
-  Mic,
-  Zap,
-  Boxes,
-  FileText,
-  Brain,
-} from 'lucide-react'
+import { MessageSquare, Mic, Zap, Boxes, FileText, GitBranch } from 'lucide-react'
 
 const services = [
   {
     icon: MessageSquare,
     title: 'RAG-Based AI Chatbots',
-    description: 'Intelligent chatbots that access your knowledge base, documents, and data sources to provide accurate, contextual answers.',
+    description:
+      'Chatbots that answer from your own documents, policies, or knowledge base — with source-cited, accurate responses.',
   },
   {
     icon: Mic,
     title: 'Multilingual Voice Agents',
-    description: 'Voice-enabled AI agents that understand and respond in multiple languages, perfect for global operations.',
+    description:
+      'Voice AI systems that handle calls, support, and operations in multiple languages with real-time processing.',
   },
   {
     icon: Zap,
     title: 'AI Automation Tools',
-    description: 'End-to-end workflow automation that integrates with your existing systems and processes.',
+    description:
+      'Automate repetitive business processes by connecting AI to your existing APIs, tools, and workflows.',
   },
   {
     icon: Boxes,
     title: 'AI SaaS Platforms',
-    description: 'Build scalable, production-grade AI products with proper infrastructure, monitoring, and performance.',
+    description:
+      'Scalable AI-powered SaaS products built to handle real users, real data, and real-world load.',
   },
   {
     icon: FileText,
     title: 'Document Intelligence',
-    description: 'Extract, analyze, and process documents at scale using AI-powered document understanding.',
+    description:
+      'Extract structured data, classify, and process large volumes of documents automatically and accurately.',
   },
   {
-    icon: Brain,
-    title: 'Custom AI Agents',
-    description: 'Purpose-built AI agents that can reason, plan, and execute complex business tasks.',
+    icon: GitBranch,
+    title: 'AI Agents & Workflow Systems',
+    description:
+      'Custom AI agents that connect to your business systems, execute tasks, and operate within defined workflows.',
   },
 ]
 
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.09 } },
+}
+
+const card = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+}
+
 export default function Services() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
-
   return (
     <section className="section-padding bg-primary">
       <div className="max-w-7xl mx-auto">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">What We Build</h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Comprehensive AI solutions tailored to automate operations and enhance your business capabilities.
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">Services</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5">What We Build</h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            AI systems designed for deployment — not for demos.
           </p>
         </motion.div>
 
-        {/* Services Grid */}
+        {/* Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          variants={container}
           initial="hidden"
           whileInView="visible"
+          viewport={{ once: true }}
         >
-          {services.map((service, index) => {
-            const Icon = service.icon
+          {services.map((s) => {
+            const Icon = s.icon
             return (
               <motion.div
-                key={service.title}
-                variants={itemVariants}
-                className="group glass-effect glow-card p-8 rounded-xl border border-accent/20 hover:border-accent/50 cursor-pointer"
+                key={s.title}
+                variants={card}
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="group glass-effect glow-card p-7 rounded-xl border border-accent/15 hover:border-accent/45 cursor-default transition-all duration-300"
               >
-                {/* Icon with background */}
-                <div className="mb-6 inline-block p-4 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
-                  <Icon className="w-6 h-6 text-accent" />
+                <div className="mb-5 inline-flex p-3 rounded-lg bg-accent/10 group-hover:bg-accent/18 transition-colors">
+                  <Icon className="w-5 h-5 text-accent" />
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-accent-light transition-colors">
-                  {service.title}
+                <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-accent-light transition-colors">
+                  {s.title}
                 </h3>
-
-                {/* Description */}
-                <p className="text-slate-400 leading-relaxed mb-4">
-                  {service.description}
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  {s.description}
                 </p>
-
-                {/* Arrow indicator */}
-                <div className="flex items-center text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more
-                  <span className="ml-2 inline-block transform group-hover:translate-x-2 transition-transform">→</span>
-                </div>
               </motion.div>
             )
           })}

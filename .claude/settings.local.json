@@ -11,7 +11,9 @@
       "Bash(chmod +x /Users/rupesh/experiments/swiftai-website/verify-build.sh)",
       "Bash(/Users/rupesh/experiments/swiftai-website/verify-build.sh)",
       "Bash(git commit -m 'Add deployment and quickstart guides *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(npm install *)"
     ]
   }
 }

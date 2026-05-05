@@ -1,106 +1,124 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  Lightbulb,
-  Palette,
-  Code,
-  Rocket,
-  TrendingUp,
-} from 'lucide-react'
+import { Search, Layers, Code2, Rocket, TrendingUp } from 'lucide-react'
 
 const steps = [
   {
-    icon: Lightbulb,
+    icon: Search,
     title: 'Discover',
-    description: 'We dive deep into your business, challenges, and goals to understand what AI can truly solve for you.',
+    description: 'Understand your workflows, data, and the problem AI should actually solve.',
   },
   {
-    icon: Palette,
+    icon: Layers,
     title: 'Design',
-    description: 'We architect scalable, maintainable solutions with proper data pipelines, workflows, and system design.',
+    description: 'Architect the system — data pipelines, integrations, user flows, and failure modes.',
   },
   {
-    icon: Code,
+    icon: Code2,
     title: 'Build',
-    description: 'Production-grade development with testing, monitoring, security, and performance optimization from day one.',
+    description: 'Build with production standards: testing, security, monitoring, performance.',
   },
   {
     icon: Rocket,
     title: 'Deploy',
-    description: 'We handle deployment, integration, and setup so your team can focus on leveraging the AI system.',
+    description: 'Handle deployment, integration, and handoff so your team can start using it.',
   },
   {
     icon: TrendingUp,
     title: 'Scale',
-    description: 'Continuous optimization, monitoring, and enhancement as your system grows and evolves.',
+    description: 'Monitor, tune, and evolve the system as your usage and needs grow.',
   },
 ]
 
 export default function Process() {
   return (
-    <section className="section-padding bg-primary">
+    <section className="section-padding bg-secondary/25">
       <div className="max-w-7xl mx-auto">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Process</h2>
-          <p className="text-xl text-slate-400">
-            A proven methodology for building AI systems that deliver real value
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">How We Work</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5">Our Process</h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            A disciplined approach from first call to live system.
           </p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent-dark to-transparent transform -translate-x-1/2 z-0" />
+        {/* ── Horizontal flow (desktop) ── */}
+        <div className="hidden lg:block">
+          {/* Connector line */}
+          <div className="relative flex items-start justify-between gap-0">
 
-          {/* Steps */}
-          <div className="space-y-12">
-            {steps.map((step, index) => {
+            {/* Background line */}
+            <div className="absolute top-10 left-[10%] right-[10%] h-px bg-gradient-to-r from-accent/10 via-accent/50 to-accent/10" />
+
+            {steps.map((step, i) => {
               const Icon = step.icon
-              const isEven = index % 2 === 0
-
               return (
                 <motion.div
                   key={step.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`flex flex-col lg:flex-row gap-8 items-center ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+                  transition={{ duration: 0.55, delay: i * 0.12 }}
+                  viewport={{ once: true }}
+                  className="relative flex flex-col items-center text-center flex-1 px-4"
                 >
-                  {/* Content */}
-                  <div className="flex-1 text-center lg:text-left">
-                    <h3 className="text-2xl font-semibold mb-3 text-white">
-                      {index + 1}. {step.title}
-                    </h3>
-                    <p className="text-slate-400 text-lg leading-relaxed">
-                      {step.description}
-                    </p>
+                  {/* Step number bubble */}
+                  <div className="relative z-10 mb-5">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      className="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center shadow-glow border-4 border-primary cursor-default"
+                    >
+                      <Icon className="w-8 h-8 text-white" />
+                    </motion.div>
+                    {/* Step number badge */}
+                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary border border-accent text-accent text-[10px] font-bold flex items-center justify-center">
+                      {i + 1}
+                    </span>
                   </div>
 
-                  {/* Icon circle */}
-                  <motion.div
-                    className="flex-shrink-0 relative z-10"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center border-4 border-secondary shadow-glow cursor-pointer hover:shadow-lg transition-shadow">
-                      <Icon className="w-10 h-10 text-white" />
-                    </div>
-                  </motion.div>
-
-                  {/* Content for mobile */}
-                  <div className="flex-1" />
+                  <h3 className="text-white font-bold text-lg mb-2">{step.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed max-w-[160px]">{step.description}</p>
                 </motion.div>
               )
             })}
           </div>
         </div>
+
+        {/* ── Vertical flow (mobile) ── */}
+        <div className="lg:hidden space-y-6">
+          {steps.map((step, i) => {
+            const Icon = step.icon
+            return (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="flex gap-5 items-start p-5 rounded-xl border border-accent/15 bg-secondary/30"
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center shadow-glow-sm">
+                  <Icon className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-accent text-xs font-bold">0{i + 1}</span>
+                    <h3 className="text-white font-semibold">{step.title}</h3>
+                  </div>
+                  <p className="text-slate-400 text-sm leading-relaxed">{step.description}</p>
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+
       </div>
     </section>
   )

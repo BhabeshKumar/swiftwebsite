@@ -1,117 +1,100 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  Zap,
-  Shield,
-  Users,
-  Lock,
-  Rocket,
-  TrendingUp,
-} from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 
 const reasons = [
   {
-    icon: Zap,
-    title: 'Production-First Mindset',
-    description: 'We build systems that are battle-tested, monitoring-ready, and designed for real-world deployment from day one.',
+    title: 'Production-ready from day one',
+    body: 'Every system we build is designed to handle real traffic, real users, and real failure conditions — not just pass a demo.',
   },
   {
-    icon: TrendingUp,
-    title: 'Scalable Architecture',
-    description: 'Infrastructure designed to grow with your business, from MVP to millions of requests per day.',
+    title: 'We focus on workflows, not experiments',
+    body: 'We integrate AI into your actual operations, not alongside them. The result is adoption, not a tool that sits unused.',
   },
   {
-    icon: Users,
-    title: 'Human-in-the-Loop Design',
-    description: 'AI systems that augment human capabilities, with proper oversight and control mechanisms.',
+    title: 'Designed for people, not engineers',
+    body: "AI is only valuable when teams use it. We design for adoption — simple interfaces, clear outputs, sensible defaults.",
   },
   {
-    icon: Lock,
-    title: 'Privacy-Aware Systems',
-    description: 'Built with data privacy and compliance at the core—GDPR, SOC 2, and security-first architecture.',
+    title: 'Reliability and clarity over hype',
+    body: 'We don\'t over-promise. We scope carefully, build cleanly, and deliver systems that behave predictably.',
   },
   {
-    icon: Rocket,
-    title: 'Fast MVP Delivery',
-    description: 'Get to market quickly without sacrificing quality. We focus on what matters first.',
+    title: 'Human-in-the-loop by design',
+    body: 'Critical decisions stay with your team. Our systems are built with appropriate oversight, escalation paths, and fallbacks.',
   },
   {
-    icon: Shield,
-    title: 'Business-Focused Approach',
-    description: 'Every feature, every decision is aligned with your business goals and ROI.',
+    title: 'Privacy and security built in',
+    body: 'Data handling, access controls, and compliance considerations are part of the architecture — not an afterthought.',
   },
 ]
 
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.09 } },
+}
+
+const item = {
+  hidden: { opacity: 0, x: -16 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+}
+
 export default function WhySwiftAi() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-  }
-
   return (
-    <section className="section-padding bg-secondary/30">
+    <section className="section-padding bg-primary">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            AI That Is Practical, Secure, and Built for Adoption
-          </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            We don't build experiments. We build AI systems that drive real business value.
-          </p>
-        </motion.div>
 
-        {/* Reasons grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-        >
-          {reasons.map((reason) => {
-            const Icon = reason.icon
-            return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left: header copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
+              Why SwiftAi
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Practical. Secure.{' '}
+              <span className="gradient-text">Built to Last.</span>
+            </h2>
+            <p className="text-slate-400 text-lg leading-relaxed">
+              We don't build AI to impress. We build it to operate — reliably, day after day, inside
+              real business environments.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="h-px flex-1 bg-accent/20" />
+              <span className="text-slate-500 text-sm italic">No hype. Just working systems.</span>
+              <div className="h-px flex-1 bg-accent/20" />
+            </div>
+          </motion.div>
+
+          {/* Right: reasons grid */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {reasons.map((r) => (
               <motion.div
-                key={reason.title}
-                variants={itemVariants}
-                className="flex flex-col"
+                key={r.title}
+                variants={item}
+                className="group p-5 rounded-xl border border-accent/10 hover:border-accent/35 bg-secondary/30 hover:bg-secondary/50 transition-all duration-300"
               >
-                {/* Icon */}
-                <div className="mb-4 inline-block">
-                  <div className="p-3 bg-accent/10 rounded-lg">
-                    <Icon className="w-6 h-6 text-accent" />
-                  </div>
+                <div className="flex items-start gap-3 mb-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+                  <h3 className="text-white font-semibold text-sm leading-snug">{r.title}</h3>
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-semibold mb-3 text-white">
-                  {reason.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-slate-400 leading-relaxed flex-grow">
-                  {reason.description}
-                </p>
+                <p className="text-slate-500 text-xs leading-relaxed pl-7">{r.body}</p>
               </motion.div>
-            )
-          })}
-        </motion.div>
+            ))}
+          </motion.div>
+
+        </div>
       </div>
     </section>
   )

@@ -2,43 +2,58 @@
 
 import { motion } from 'framer-motion'
 
-export default function TrustStrip() {
-  const capabilities = [
-    'RAG Chatbots',
-    'Voice Agents',
-    'AI Automation',
-    'AI SaaS Products',
-    'Workflow Intelligence',
-  ]
+const capabilities = [
+  'RAG Chatbots',
+  'Voice Agents',
+  'AI Automation',
+  'AI SaaS Products',
+  'Workflow Intelligence',
+  'Document Intelligence',
+]
 
+export default function TrustStrip() {
   return (
-    <section className="bg-secondary/50 border-t border-b border-accent/10 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Tagline */}
-        <motion.h2
+    <section className="border-y border-accent/10 bg-secondary/40 py-10 px-4">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Trust statement */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center text-slate-200 text-base md:text-lg font-medium mb-2"
+        >
+          We build AI systems that are{' '}
+          <span className="text-accent-light">deployed, used, and trusted</span>
+          {' '}— not just prototypes.
+        </motion.p>
+
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-center text-xl text-slate-300 mb-12 font-medium"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="text-center text-slate-500 text-sm mb-10"
         >
-          Built for businesses that need reliable AI, not experiments.
-        </motion.h2>
+          Designed for real-world environments, not lab demos.
+        </motion.p>
 
-        {/* Capabilities grid/carousel */}
-        <div className="flex flex-wrap justify-center gap-6">
-          {capabilities.map((capability, index) => (
-            <motion.div
-              key={capability}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center gap-3"
+        {/* Capabilities */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3"
+        >
+          {capabilities.map((cap) => (
+            <span
+              key={cap}
+              className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/5 text-slate-300 text-sm"
             >
-              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-accent to-accent-light" />
-              <span className="text-slate-300 font-medium">{capability}</span>
-            </motion.div>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              {cap}
+            </span>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

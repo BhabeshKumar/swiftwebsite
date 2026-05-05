@@ -2,99 +2,82 @@
 
 import { motion } from 'framer-motion'
 
-const techCategories = [
+const stack = [
   {
-    category: 'LLMs & AI',
-    techs: ['OpenAI', 'Anthropic', 'Gemini', 'LLaMA'],
+    category: 'LLMs & AI Models',
+    techs: ['OpenAI GPT-4o', 'Anthropic Claude', 'Google Gemini', 'Open-source LLMs'],
   },
   {
     category: 'Backend',
-    techs: ['Node.js', 'Python', 'FastAPI', 'Express'],
+    techs: ['Node.js', 'Python / FastAPI', 'Express', 'REST & WebSockets'],
   },
   {
     category: 'Frontend',
-    techs: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+    techs: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
   },
   {
-    category: 'Databases',
+    category: 'Data & Vector DBs',
     techs: ['PostgreSQL', 'MongoDB', 'Qdrant', 'pgvector'],
   },
   {
     category: 'Voice & Audio',
-    techs: ['STT Pipelines', 'TTS Engines', 'Real-time Processing', 'Audio Streaming'],
+    techs: ['STT Pipelines', 'TTS Engines', 'Real-time Audio', 'IVR Integration'],
   },
   {
     category: 'Infrastructure',
-    techs: ['Docker', 'Kubernetes', 'AWS', 'Cloud Computing'],
+    techs: ['Docker', 'Cloud Deployments', 'CI/CD Pipelines', 'Monitoring & Logging'],
   },
 ]
 
 export default function TechStack() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
-  const techVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
-  }
-
   return (
-    <section className="section-padding bg-secondary/30">
+    <section className="section-padding bg-secondary/25">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Technology Stack</h2>
-          <p className="text-xl text-slate-400">
-            We leverage the latest and most reliable technologies to build AI systems
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">Tech Stack</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5">Built On Reliable Technology</h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            Proven tools — chosen for reliability, not novelty.
           </p>
         </motion.div>
 
-        {/* Tech Categories Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           initial="hidden"
           whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+          }}
         >
-          {techCategories.map((group) => (
+          {stack.map((group) => (
             <motion.div
               key={group.category}
-              variants={itemVariants}
-              className="glass-effect glow-card p-8 rounded-xl border border-accent/20 hover:border-accent/50"
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+              whileHover={{ scale: 1.02 }}
+              className="glass-effect glow-card p-6 rounded-xl border border-accent/15 hover:border-accent/40 transition-all duration-300"
             >
-              {/* Category title */}
-              <h3 className="text-xl font-semibold text-accent mb-6">
+              <h3 className="text-accent font-semibold text-sm uppercase tracking-wide mb-5">
                 {group.category}
               </h3>
-
-              {/* Tech list */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {group.techs.map((tech) => (
-                  <motion.div
+                  <span
                     key={tech}
-                    variants={techVariants}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-4 py-2 bg-secondary rounded-lg text-slate-300 text-sm font-medium border border-accent/20 hover:border-accent/50 transition-colors cursor-default"
+                    className="px-3 py-1.5 bg-secondary rounded-lg text-slate-300 text-xs font-medium border border-accent/15 hover:border-accent/40 transition-colors"
                   >
                     {tech}
-                  </motion.div>
+                  </span>
                 ))}
               </div>
             </motion.div>

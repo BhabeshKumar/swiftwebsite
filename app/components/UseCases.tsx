@@ -1,116 +1,92 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  Headphones,
-  Lightbulb,
-  Users,
-  Mic,
-  FileText,
-  Target,
-} from 'lucide-react'
+import { Headphones, BookOpen, Users, Mic, FileText, Filter } from 'lucide-react'
 
-const useCases = [
+const cases = [
   {
     icon: Headphones,
     title: 'Customer Support Automation',
-    description: 'AI-powered support agents that handle common inquiries 24/7, reducing support costs while improving response times.',
+    description: 'AI agents that handle common queries 24/7 — reducing ticket volume and response times without replacing human support.',
   },
   {
-    icon: Lightbulb,
+    icon: BookOpen,
     title: 'Internal Knowledge Assistants',
-    description: 'AI systems that help your team access institutional knowledge, policies, and documentation instantly.',
+    description: 'Employees ask questions; the AI answers from your policies, SOPs, and internal docs — accurately, instantly.',
   },
   {
     icon: Users,
-    title: 'Workforce Intelligence Systems',
-    description: 'Tools that analyze workflows, optimize processes, and help teams work more effectively with AI assistance.',
+    title: 'Workforce Intelligence',
+    description: 'AI that surfaces patterns in operations data, helping managers make faster, better-informed decisions.',
   },
   {
     icon: Mic,
     title: 'Voice-Based Operations',
-    description: 'Voice interfaces for hands-free operations, perfect for field teams and environments where typing isn\'t practical.',
+    description: 'Voice interfaces for field teams, call centres, or customer touchpoints where typing isn\'t practical.',
   },
   {
     icon: FileText,
-    title: 'Document Intelligence',
-    description: 'Automated document processing, classification, and extraction at enterprise scale.',
+    title: 'Document Processing',
+    description: 'Extract, classify, and route information from invoices, contracts, and forms — at volume, without manual effort.',
   },
   {
-    icon: Target,
-    title: 'Lead Qualification Automation',
-    description: 'AI-driven lead scoring and qualification that helps sales teams focus on the right opportunities.',
+    icon: Filter,
+    title: 'Lead Qualification',
+    description: 'AI that qualifies inbound leads based on your criteria and routes them to the right person at the right time.',
   },
 ]
 
+const container = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+}
+
+const card = {
+  hidden: { opacity: 0, scale: 0.97 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+}
+
 export default function UseCases() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-  }
-
   return (
-    <section className="section-padding bg-secondary/30">
+    <section className="section-padding bg-primary">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Real-World Use Cases</h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            AI solutions that solve concrete business problems
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">Use Cases</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5">Where It Gets Deployed</h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            Concrete applications that solve real operational problems.
           </p>
         </motion.div>
 
-        {/* Use Cases Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          variants={container}
           initial="hidden"
           whileInView="visible"
+          viewport={{ once: true }}
         >
-          {useCases.map((useCase) => {
-            const Icon = useCase.icon
+          {cases.map((c) => {
+            const Icon = c.icon
             return (
               <motion.div
-                key={useCase.title}
-                variants={itemVariants}
-                className="group glass-effect glow-card p-8 rounded-xl border border-accent/20 hover:border-accent/50 relative overflow-hidden"
+                key={c.title}
+                variants={card}
+                whileHover={{ scale: 1.02, y: -3 }}
+                className="group glass-effect glow-card p-7 rounded-xl border border-accent/15 hover:border-accent/40 relative overflow-hidden transition-all duration-300"
               >
-                {/* Background gradient on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Content */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-transparent group-hover:from-accent/5 rounded-xl transition-all duration-500" />
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-6 inline-block">
-                    <div className="p-3 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
-                      <Icon className="w-6 h-6 text-accent" />
-                    </div>
+                  <div className="mb-5 inline-flex p-3 rounded-lg bg-accent/10 group-hover:bg-accent/18 transition-colors">
+                    <Icon className="w-5 h-5 text-accent" />
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-semibold mb-3 text-white">
-                    {useCase.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-slate-400 leading-relaxed">
-                    {useCase.description}
-                  </p>
+                  <h3 className="text-white font-semibold text-base mb-3">{c.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{c.description}</p>
                 </div>
               </motion.div>
             )

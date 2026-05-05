@@ -1,10 +1,10 @@
 import Hero from './components/Hero'
 import TrustStrip from './components/TrustStrip'
 import Services from './components/Services'
+import WhatWeBuilt from './components/WhatWeBuilt'
 import WhySwiftAi from './components/WhySwiftAi'
 import Process from './components/Process'
 import UseCases from './components/UseCases'
-import Experience from './components/Experience'
 import TechStack from './components/TechStack'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -17,12 +17,14 @@ export default function Home() {
       <section id="services">
         <Services />
       </section>
+      <section id="built">
+        <WhatWeBuilt />
+      </section>
       <WhySwiftAi />
       <section id="process">
         <Process />
       </section>
       <UseCases />
-      <Experience />
       <TechStack />
       <section id="contact">
         <Contact />
