@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import ScrollStack, { ScrollStackItem } from './ScrollStack'
 
 const stack = [
   {
@@ -29,6 +30,27 @@ const stack = [
   },
 ]
 
+// Shared card inner
+function StackCard({ group }: { group: typeof stack[0] }) {
+  return (
+    <div className="bg-secondary rounded-2xl border border-accent/25 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+      <h3 className="text-accent font-semibold text-sm uppercase tracking-wide mb-4">
+        {group.category}
+      </h3>
+      <div className="flex flex-wrap gap-2">
+        {group.techs.map((tech) => (
+          <span
+            key={tech}
+            className="px-3 py-1.5 bg-primary rounded-lg text-slate-300 text-xs font-medium border border-accent/20"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function TechStack() {
   return (
     <section className="section-padding bg-secondary/25">
@@ -38,7 +60,7 @@ export default function TechStack() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">Tech Stack</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-5">Built On Reliable Technology</h2>
@@ -47,8 +69,27 @@ export default function TechStack() {
           </p>
         </motion.div>
 
+        {/* ── Mobile: ScrollStack ── */}
+        <div className="md:hidden pb-32">
+          <ScrollStack
+            itemDistance={60}
+            itemStackDistance={18}
+            baseScale={0.88}
+            itemScale={0.025}
+            stackPosition="22%"
+            scaleEndPosition="8%"
+          >
+            {stack.map((group) => (
+              <ScrollStackItem key={group.category}>
+                <StackCard group={group} />
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
+        </div>
+
+        {/* ── Desktop: Grid ── */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -83,6 +124,7 @@ export default function TechStack() {
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </section>
   )

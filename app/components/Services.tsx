@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MessageSquare, Mic, Zap, Boxes, FileText, GitBranch } from 'lucide-react'
+import ScrollStack, { ScrollStackItem } from './ScrollStack'
 
 const services = [
   {
@@ -52,6 +53,20 @@ const card = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
 }
 
+// Shared card inner — used in both mobile (ScrollStack) and desktop grid
+function ServiceCard({ s }: { s: typeof services[0] }) {
+  const Icon = s.icon
+  return (
+    <div className="bg-secondary rounded-2xl border border-accent/25 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+      <div className="mb-4 inline-flex p-3 rounded-xl bg-accent/12 border border-accent/20">
+        <Icon className="w-5 h-5 text-accent" />
+      </div>
+      <h3 className="text-lg font-semibold text-white mb-2">{s.title}</h3>
+      <p className="text-slate-400 text-sm leading-relaxed">{s.description}</p>
+    </div>
+  )
+}
+
 export default function Services() {
   return (
     <section className="section-padding bg-primary">
@@ -62,7 +77,7 @@ export default function Services() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">Services</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-5">What We Build</h2>
@@ -71,9 +86,27 @@ export default function Services() {
           </p>
         </motion.div>
 
-        {/* Grid */}
+        {/* ── Mobile: ScrollStack ── */}
+        <div className="md:hidden pb-32">
+          <ScrollStack
+            itemDistance={70}
+            itemStackDistance={20}
+            baseScale={0.88}
+            itemScale={0.025}
+            stackPosition="22%"
+            scaleEndPosition="8%"
+          >
+            {services.map((s) => (
+              <ScrollStackItem key={s.title}>
+                <ServiceCard s={s} />
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
+        </div>
+
+        {/* ── Desktop: Grid ── */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={container}
           initial="hidden"
           whileInView="visible"
@@ -101,6 +134,7 @@ export default function Services() {
             )
           })}
         </motion.div>
+
       </div>
     </section>
   )

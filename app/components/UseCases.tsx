@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Headphones, BookOpen, Users, Mic, FileText, Filter } from 'lucide-react'
+import ScrollStack, { ScrollStackItem } from './ScrollStack'
 
 const cases = [
   {
@@ -22,7 +23,7 @@ const cases = [
   {
     icon: Mic,
     title: 'Voice-Based Operations',
-    description: 'Voice interfaces for field teams, call centres, or customer touchpoints where typing isn\'t practical.',
+    description: "Voice interfaces for field teams, call centres, or customer touchpoints where typing isn't practical.",
   },
   {
     icon: FileText,
@@ -46,6 +47,20 @@ const card = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
 }
 
+// Shared card inner
+function CaseCard({ c }: { c: typeof cases[0] }) {
+  const Icon = c.icon
+  return (
+    <div className="bg-secondary rounded-2xl border border-accent/25 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+      <div className="mb-4 inline-flex p-3 rounded-xl bg-accent/12 border border-accent/20">
+        <Icon className="w-5 h-5 text-accent" />
+      </div>
+      <h3 className="text-white font-semibold text-base mb-2">{c.title}</h3>
+      <p className="text-slate-400 text-sm leading-relaxed">{c.description}</p>
+    </div>
+  )
+}
+
 export default function UseCases() {
   return (
     <section className="section-padding bg-primary">
@@ -55,7 +70,7 @@ export default function UseCases() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">Use Cases</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-5">Where It Gets Deployed</h2>
@@ -64,8 +79,27 @@ export default function UseCases() {
           </p>
         </motion.div>
 
+        {/* ── Mobile: ScrollStack ── */}
+        <div className="md:hidden pb-32">
+          <ScrollStack
+            itemDistance={70}
+            itemStackDistance={20}
+            baseScale={0.88}
+            itemScale={0.025}
+            stackPosition="22%"
+            scaleEndPosition="8%"
+          >
+            {cases.map((c) => (
+              <ScrollStackItem key={c.title}>
+                <CaseCard c={c} />
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
+        </div>
+
+        {/* ── Desktop: Grid ── */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={container}
           initial="hidden"
           whileInView="visible"
@@ -92,6 +126,7 @@ export default function UseCases() {
             )
           })}
         </motion.div>
+
       </div>
     </section>
   )
