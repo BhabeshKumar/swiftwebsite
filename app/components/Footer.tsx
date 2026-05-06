@@ -48,11 +48,6 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-6">Company</h4>
             <p className="text-slate-500 text-sm leading-relaxed mb-3">
-              SwiftAi operates under{' '}
-              <span className="text-slate-400">Mishra Tiles and Sanitary</span>{' '}
-              for taxation purposes.
-            </p>
-            <p className="text-slate-500 text-sm">
               GSTIN:{' '}
               <span className="text-slate-400 font-mono">21ABKPM7707M1ZE</span>
             </p>

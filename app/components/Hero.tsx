@@ -223,14 +223,6 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
-          <motion.div variants={fadeUp}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/8 backdrop-blur-sm text-accent-light text-sm font-medium tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              Production AI Systems
-            </span>
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             variants={fadeUp}
